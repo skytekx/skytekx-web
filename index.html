@@ -200,7 +200,7 @@
     margin:clamp(40px,7vw,72px) 0 0;
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-color:transparent;                  /* stars sit on the page bg, no solid blue fill */
-    background-image:url('/assets/nyan-stars.gif?v=8'); /* sparse twinkling plus-stars only; ?v busts browser cache when count changes */
+    background-image:url('/assets/nyan-stars.gif?v=9'); /* sparse plus-stars that grow from a dot; ?v busts browser cache when the GIF changes */
     background-repeat:repeat;
     background-size:auto;                           /* native 1280x320 pixels - never scaled/stretched */
     background-position:0 0;
@@ -217,7 +217,7 @@
     filter:drop-shadow(0 0 14px rgba(255,170,0,.16)) drop-shadow(0 4px 10px #000a);
   }
   @media (prefers-reduced-motion:reduce){
-    .nyan-band{ background-image:url('/assets/nyan-stars.png?v=8'); animation:none; } /* freeze twinkle + scroll */
+    .nyan-band{ background-image:url('/assets/nyan-stars.png?v=9'); animation:none; } /* freeze twinkle + scroll */
   }
   @media (max-width:560px){
     .nyan-band{ min-height:228px; }
