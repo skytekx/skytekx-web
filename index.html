@@ -166,34 +166,35 @@
   footer a{ color:var(--mut); } footer a:hover{ color:var(--gold); }
   footer .disc{ margin-top:14px; font-size:.82rem; opacity:.65; }
 
-  /* ---------- flying nostalgia sprites (nyan cat + rainbow dash) ---------- */
-  .nyan-sky{ position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:3; }
-  .nyan-sky img{ position:absolute; width:auto; image-rendering:auto; will-change:transform; }
-  /* Nyan cat sits at the far-right of a 5000px rainbow trail and faces right -> flies left to right */
-  .nyan-cat{ top:16vh; height:84px; transform:translateX(-2600px); animation:nyan-fly 30s linear infinite; }
-  @keyframes nyan-fly{
-    0%   { transform:translateX(-2600px) translateY(0); }
-    14%  { transform:translateX(-1300px) translateY(-14px); }
-    30%  { transform:translateX(100vw) translateY(8px); }
-    100% { transform:translateX(100vw) translateY(8px); }
+  /* ---------- static nyan-cat section separator (erebos-style) ---------- */
+  /* The nyancat.gif (a 5000px-wide transparent rainbow trail with the cat at
+     one end) IS the divider: its own trail forms the line straight across the
+     content width. The GIF animates in place; the element never travels.
+     On the finale separator above the footer, Rainbow Dash perches static in
+     the right corner. Nothing here uses a CSS motion animation, so there is no
+     fly-by to disable under prefers-reduced-motion. */
+  .nyan-sep{ position:relative; line-height:0; margin:6px auto; }
+  .nyan-sep .trail{
+    display:block; width:100%; height:auto; image-rendering:auto;
+    filter:drop-shadow(0 0 12px rgba(255,170,0,.14)) drop-shadow(0 3px 9px #000a);
   }
-  /* Rainbow Dash faces left -> flies right to left, lower on the screen, offset in time */
-  .rainbow-dash{ top:58vh; height:150px; transform:translateX(110vw); animation:dash-fly 42s linear infinite; animation-delay:14s; }
-  @keyframes dash-fly{
-    0%   { transform:translateX(110vw) translateY(0); }
-    13%  { transform:translateX(40vw) translateY(-12px); }
-    26%  { transform:translateX(-360px) translateY(6px); }
-    100% { transform:translateX(-360px) translateY(6px); }
+  /* finale separator above the footer: cat flipped to the LEFT so the RIGHT
+     corner is free for Rainbow Dash, who perches on the line. padding-top
+     reserves the headroom she stands in (trail sits at the band's bottom). */
+  .nyan-sep.finale{ padding-top:clamp(56px,11vw,118px); margin-top:20px; }
+  .nyan-sep.finale .trail{ transform:scaleX(-1); }
+  .nyan-sep .dash{
+    position:absolute; right:clamp(2px,3vw,42px); bottom:1px; left:auto;
+    /* size by an explicit WIDTH (height:auto) so an abs-positioned <img> can
+       never auto-stretch to the container; keeps her aspect ratio intact */
+    width:clamp(78px,16vw,158px); height:auto; pointer-events:none;
+    /* rainbowdash.png already faces left -> reads facing INTO the page from the right corner */
+    filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
   }
-  @media (max-width:760px){ .nyan-cat{ height:58px; } .rainbow-dash{ display:none; } }
-  @media (prefers-reduced-motion:reduce){ .nyan-sky{ display:none; } }
+  @media (max-width:560px){ .nyan-sep .dash{ width:62px; right:2px; } }
 </style>
 </head>
 <body>
-<div class="nyan-sky" aria-hidden="true">
-  <img class="nyan-cat" src="/assets/nyancat.gif" alt="" loading="lazy" decoding="async">
-  <img class="rainbow-dash" src="/assets/rainbowdash.png" alt="" loading="lazy" decoding="async">
-</div>
 <div class="lang-toggle" role="group" aria-label="Language">
   <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
   <span class="lang-sep" aria-hidden="true">/</span>
@@ -261,6 +262,10 @@
     </div>
   </div>
 </section>
+
+<div class="nyan-sep wrap" aria-hidden="true">
+  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+</div>
 
 <section class="wrap">
   <h2 data-i18n-html="history.h2">The <span class="accent">SkyTekx story</span></h2>
@@ -346,6 +351,10 @@
     </div>
   </div>
 </section>
+
+<div class="nyan-sep wrap" aria-hidden="true">
+  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+</div>
 
 <section class="wrap">
   <div class="join">
@@ -449,6 +458,11 @@ ufw allow 25565/tcp</code></pre>
     </div>
   </div>
 </section>
+
+<div class="nyan-sep finale wrap" aria-hidden="true">
+  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+  <img class="dash" src="/assets/rainbowdash.png" alt="" width="1280" height="967" loading="lazy" decoding="async">
+</div>
 
 <footer>
   <div class="wrap">
