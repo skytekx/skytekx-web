@@ -167,39 +167,31 @@
   footer a{ color:var(--mut); } footer a:hover{ color:var(--gold); }
   footer .disc{ margin-top:14px; font-size:.82rem; opacity:.65; }
 
-  /* ---------- nyan band (full-bleed erebos finale) ---------- */
-  /* Erebos's nyan was a full-width <header class="nyan"> band: min-height:320px,
-     a fixed star/space background (m33.png), the nyan GIF position:absolute
-     right:80px animating in place, and Rainbow Dash bottom-right. We replicate
-     that as ONE full-bleed band placed above the footer.
+  /* ---------- nyan band (full-bleed section separator) ---------- */
+  /* A full-bleed band that sits ABOVE "The SkyTekx story" section, exactly
+     like erebos used it as the separator before the story.
        - Full-bleed: a plain block child of <body> already spans the full
          viewport content width (it is NOT inside .wrap's 1060px max-width).
        - The nyancat.gif is a 5000x198 strip with the cat at the RIGHT end and a
          long rainbow trail to the left. Sized by height (width:auto) and pinned
          to the right, its ~3800px trail streams LEFT and overflows the left edge;
          overflow:hidden clips it at the screen edge (no horizontal scrollbar).
-       - Background = erebos's m33 deep-star field (nyan-space.png) under the
-         iconic twinkling plus-shaped nyan stars (nyan-stars.gif), drifting left
-         for the flying-through-space feel. The twinkle lives in the GIF frames;
-         the CSS only scrolls. prefers-reduced-motion freezes both: the scroll
-         animation is removed and the GIF is swapped for a static PNG frame. */
+       - Background = ONLY the iconic twinkling plus-shaped nyan stars
+         (nyan-stars.gif) tiled over the dark band colour. No photo/m33 layer,
+         no scroll motion: the twinkle lives entirely in the GIF frames.
+         prefers-reduced-motion swaps the GIF for a static PNG frame (no motion).
+       - Rainbow Dash is NOT in this band anymore; she lives above the footer
+         (see .dash-strip). */
   .nyan-band{
     position:relative; overflow:hidden;            /* clip the left-overflowing trail */
     min-height:320px;                              /* erebos band height */
     margin:clamp(40px,7vw,72px) 0 0;
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-color:#07071c;
-    background-image:
-      url('/assets/nyan-stars.gif'),               /* twinkling plus-stars (top) */
-      url('/assets/nyan-space.png');               /* erebos m33 deep stars (beneath) */
-    background-repeat:repeat, repeat;
-    background-size:192px 192px, 584px 392px;
-    background-position:0 0, 0 0;
-    animation:nyan-scroll 30s linear infinite;
-  }
-  @keyframes nyan-scroll{
-    from{ background-position:0 0, 0 0; }
-    to{ background-position:-576px 0, -584px 0; } /* whole-tile steps -> seamless loop */
+    background-image:url('/assets/nyan-stars.gif'); /* twinkling plus-stars only */
+    background-repeat:repeat;
+    background-size:192px 192px;
+    background-position:0 0;
   }
   .nyan-band .cat{
     position:absolute; z-index:2; top:50%; transform:translateY(-50%);
@@ -209,19 +201,30 @@
     pointer-events:none; image-rendering:auto;
     filter:drop-shadow(0 0 14px rgba(255,170,0,.16)) drop-shadow(0 4px 10px #000a);
   }
-  .nyan-band .dash{
-    position:absolute; z-index:3; right:clamp(6px,3vw,40px); bottom:0;
-    /* rainbowdash.png already faces left -> reads facing INTO the page from the corner */
-    width:clamp(104px,17vw,190px); height:auto; pointer-events:none;
-    filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
-  }
   @media (prefers-reduced-motion:reduce){
-    .nyan-band{ animation:none;
-      background-image:url('/assets/nyan-stars.png'),url('/assets/nyan-space.png'); }
+    .nyan-band{ background-image:url('/assets/nyan-stars.png'); } /* freeze twinkle */
   }
   @media (max-width:560px){
     .nyan-band{ min-height:228px; }
-    .nyan-band .dash{ width:92px; right:4px; }
+  }
+
+  /* ---------- rainbow dash strip (above footer) ---------- */
+  /* A subtle thin rainbow accent line directly above the footer with Rainbow
+     Dash perched in the right corner. rainbowdash.png already faces left, so
+     from the right corner she reads as facing INTO the page. Static, no motion. */
+  .dash-strip{
+    position:relative;
+    margin-top:clamp(40px,7vw,72px);
+    height:3px;
+    background:var(--rainbow);
+  }
+  .dash-strip .dash{
+    position:absolute; z-index:3; right:clamp(6px,3vw,40px); bottom:0;
+    width:clamp(104px,17vw,190px); height:auto; pointer-events:none;
+    filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
+  }
+  @media (max-width:560px){
+    .dash-strip .dash{ width:92px; right:4px; }
   }
 </style>
 </head>
@@ -293,6 +296,10 @@
     </div>
   </div>
 </section>
+
+<div class="nyan-band" aria-hidden="true">
+  <img class="cat" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+</div>
 
 <section class="wrap">
   <h2 data-i18n-html="history.h2">The <span class="accent">SkyTekx story</span></h2>
@@ -482,8 +489,7 @@ ufw allow 25565/tcp</code></pre>
   </div>
 </section>
 
-<div class="nyan-band" aria-hidden="true">
-  <img class="cat" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+<div class="dash-strip" aria-hidden="true">
   <img class="dash" src="/assets/rainbowdash.png" alt="" width="1280" height="967" loading="lazy" decoding="async">
 </div>
 
