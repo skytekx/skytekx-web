@@ -23,7 +23,7 @@
     background:radial-gradient(1100px 700px at 50% -8%, #161616 0%, transparent 62%), var(--bg);
     line-height:1.65; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
+  body::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
   @keyframes loadbar{ from{ transform:scaleX(0) translateZ(0); } to{ transform:scaleX(1) translateZ(0); } }
   a{ color:var(--gold); text-decoration:none; }
   a:hover{ text-decoration:underline; }

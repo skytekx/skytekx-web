@@ -37,7 +37,7 @@
     line-height:1.65; -webkit-font-smoothing:antialiased;   /* no background-attachment:fixed -> iOS Safari can't repaint a fixed bg mid-scroll and flashes transparent */
     overflow-x:hidden; /* guard: keep the full-bleed nyan band from ever causing h-scroll */
   }
-  body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
+  body::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
   @keyframes loadbar{ from{ transform:scaleX(0) translateZ(0); } to{ transform:scaleX(1) translateZ(0); } }
   a{ color:var(--gold); text-decoration:none; }
   .wrap{ max-width:1060px; margin:0 auto; padding:0 clamp(24px,5.5vw,60px); }
