@@ -138,6 +138,7 @@
   .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
   .chip{ display:inline-flex; align-items:center; gap:8px; font-size:.82rem; color:var(--gold); border:1px solid var(--line-w); border-radius:999px; padding:4px 13px 4px 4px; background:#140f02; }
   /* whole community card links to its credits page; chip links inside stay clickable (stretched-link pattern) */
+  .card:has(.tl-credits){ cursor:pointer; }   /* whole card reads as a link -> no arrow/pointer cursor flicker over text/padding */
   .card .tl-credits::after{ content:''; position:absolute; inset:0; z-index:1; }
   .card .chips a{ position:relative; z-index:2; }
   .chip .avatar{ width:26px; height:26px; border-radius:50%; object-fit:cover; flex:none; border:1px solid var(--line-w); background:#0a0a0a; }
