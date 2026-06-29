@@ -35,6 +35,7 @@
     font-family:system-ui,-apple-system,'Segoe UI',sans-serif; color:var(--txt);
     background:radial-gradient(1100px 700px at 50% -8%, #161616 0%, transparent 62%), var(--bg);
     background-attachment:fixed; line-height:1.65; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden; /* guard: keep the full-bleed nyan band from ever causing h-scroll */
   }
   body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; }
   @keyframes loadbar{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
@@ -166,32 +167,62 @@
   footer a{ color:var(--mut); } footer a:hover{ color:var(--gold); }
   footer .disc{ margin-top:14px; font-size:.82rem; opacity:.65; }
 
-  /* ---------- static nyan-cat section separator (erebos-style) ---------- */
-  /* The nyancat.gif (a 5000px-wide transparent rainbow trail with the cat at
-     one end) IS the divider: its own trail forms the line straight across the
-     content width. The GIF animates in place; the element never travels.
-     On the finale separator above the footer, Rainbow Dash perches static in
-     the right corner. Nothing here uses a CSS motion animation, so there is no
-     fly-by to disable under prefers-reduced-motion. */
-  .nyan-sep{ position:relative; line-height:0; margin:6px auto; }
-  .nyan-sep .trail{
-    display:block; width:100%; height:auto; image-rendering:auto;
-    filter:drop-shadow(0 0 12px rgba(255,170,0,.14)) drop-shadow(0 3px 9px #000a);
+  /* ---------- nyan band (full-bleed erebos finale) ---------- */
+  /* Erebos's nyan was a full-width <header class="nyan"> band: min-height:320px,
+     a fixed star/space background (m33.png), the nyan GIF position:absolute
+     right:80px animating in place, and Rainbow Dash bottom-right. We replicate
+     that as ONE full-bleed band placed above the footer.
+       - Full-bleed: a plain block child of <body> already spans the full
+         viewport content width (it is NOT inside .wrap's 1060px max-width).
+       - The nyancat.gif is a 5000x198 strip with the cat at the RIGHT end and a
+         long rainbow trail to the left. Sized by height (width:auto) and pinned
+         to the right, its ~3800px trail streams LEFT and overflows the left edge;
+         overflow:hidden clips it at the screen edge (no horizontal scrollbar).
+       - Background = erebos's m33 deep-star field (nyan-space.png) under the
+         iconic twinkling plus-shaped nyan stars (nyan-stars.gif), drifting left
+         for the flying-through-space feel. The twinkle lives in the GIF frames;
+         the CSS only scrolls. prefers-reduced-motion freezes both: the scroll
+         animation is removed and the GIF is swapped for a static PNG frame. */
+  .nyan-band{
+    position:relative; overflow:hidden;            /* clip the left-overflowing trail */
+    min-height:320px;                              /* erebos band height */
+    margin:clamp(40px,7vw,72px) 0 0;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    background-color:#07071c;
+    background-image:
+      url('/assets/nyan-stars.gif'),               /* twinkling plus-stars (top) */
+      url('/assets/nyan-space.png');               /* erebos m33 deep stars (beneath) */
+    background-repeat:repeat, repeat;
+    background-size:192px 192px, 584px 392px;
+    background-position:0 0, 0 0;
+    animation:nyan-scroll 30s linear infinite;
   }
-  /* finale separator above the footer: cat flipped to the LEFT so the RIGHT
-     corner is free for Rainbow Dash, who perches on the line. padding-top
-     reserves the headroom she stands in (trail sits at the band's bottom). */
-  .nyan-sep.finale{ padding-top:clamp(56px,11vw,118px); margin-top:20px; }
-  .nyan-sep.finale .trail{ transform:scaleX(-1); }
-  .nyan-sep .dash{
-    position:absolute; right:clamp(2px,3vw,42px); bottom:1px; left:auto;
-    /* size by an explicit WIDTH (height:auto) so an abs-positioned <img> can
-       never auto-stretch to the container; keeps her aspect ratio intact */
-    width:clamp(78px,16vw,158px); height:auto; pointer-events:none;
-    /* rainbowdash.png already faces left -> reads facing INTO the page from the right corner */
+  @keyframes nyan-scroll{
+    from{ background-position:0 0, 0 0; }
+    to{ background-position:-576px 0, -584px 0; } /* whole-tile steps -> seamless loop */
+  }
+  .nyan-band .cat{
+    position:absolute; z-index:2; top:50%; transform:translateY(-50%);
+    right:clamp(16px,5vw,80px);
+    /* size by HEIGHT so the 5000:198 strip keeps its ratio and streams off-screen left */
+    height:clamp(108px,15vw,160px); width:auto; max-width:none;
+    pointer-events:none; image-rendering:auto;
+    filter:drop-shadow(0 0 14px rgba(255,170,0,.16)) drop-shadow(0 4px 10px #000a);
+  }
+  .nyan-band .dash{
+    position:absolute; z-index:3; right:clamp(6px,3vw,40px); bottom:0;
+    /* rainbowdash.png already faces left -> reads facing INTO the page from the corner */
+    width:clamp(104px,17vw,190px); height:auto; pointer-events:none;
     filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
   }
-  @media (max-width:560px){ .nyan-sep .dash{ width:62px; right:2px; } }
+  @media (prefers-reduced-motion:reduce){
+    .nyan-band{ animation:none;
+      background-image:url('/assets/nyan-stars.png'),url('/assets/nyan-space.png'); }
+  }
+  @media (max-width:560px){
+    .nyan-band{ min-height:228px; }
+    .nyan-band .dash{ width:92px; right:4px; }
+  }
 </style>
 </head>
 <body>
@@ -262,10 +293,6 @@
     </div>
   </div>
 </section>
-
-<div class="nyan-sep wrap" aria-hidden="true">
-  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
-</div>
 
 <section class="wrap">
   <h2 data-i18n-html="history.h2">The <span class="accent">SkyTekx story</span></h2>
@@ -351,10 +378,6 @@
     </div>
   </div>
 </section>
-
-<div class="nyan-sep wrap" aria-hidden="true">
-  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
-</div>
 
 <section class="wrap">
   <div class="join">
@@ -459,8 +482,8 @@ ufw allow 25565/tcp</code></pre>
   </div>
 </section>
 
-<div class="nyan-sep finale wrap" aria-hidden="true">
-  <img class="trail" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
+<div class="nyan-band" aria-hidden="true">
+  <img class="cat" src="/assets/nyancat.gif" alt="" width="5000" height="198" loading="lazy" decoding="async">
   <img class="dash" src="/assets/rainbowdash.png" alt="" width="1280" height="967" loading="lazy" decoding="async">
 </div>
 
