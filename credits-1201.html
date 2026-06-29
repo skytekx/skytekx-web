@@ -21,10 +21,10 @@
   body{
     font-family:system-ui,-apple-system,'Segoe UI',sans-serif; color:var(--txt);
     background:radial-gradient(1100px 700px at 50% -8%, #161616 0%, transparent 62%), var(--bg);
-    background-attachment:fixed; line-height:1.65; -webkit-font-smoothing:antialiased;
+    line-height:1.65; -webkit-font-smoothing:antialiased;
   }
-  body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; }
-  @keyframes loadbar{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; -webkit-backface-visibility:hidden; backface-visibility:hidden; will-change:transform; }
+  @keyframes loadbar{ from{ transform:scaleX(0) translateZ(0); } to{ transform:scaleX(1) translateZ(0); } }
   a{ color:var(--gold); text-decoration:none; }
   a:hover{ text-decoration:underline; }
   .wrap{ max-width:1060px; margin:0 auto; padding:0 clamp(24px,5.5vw,60px); }
@@ -81,7 +81,7 @@
   footer .credits-row a:hover{ color:var(--gold); }
 
   /* ---------- language toggle (matches main page) ---------- */
-  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:#141414; border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; box-shadow:0 4px 16px rgba(0,0,0,.4); }   /* opaque pill: no backdrop-filter (iOS Safari fixed+blur smears a translucent band on scroll) */
+  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:#141414; border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; box-shadow:0 4px 16px rgba(0,0,0,.4); transform:translateZ(0); -webkit-backface-visibility:hidden; }   /* opaque pill + GPU layer: no backdrop-filter, stable on iOS scroll */
   .lang-btn{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.05em; font-size:.8rem; color:var(--mut); background:none; border:none; cursor:pointer; padding:2px 6px; border-radius:6px; transition:color .15s, text-shadow .15s; }
   .lang-btn:hover{ color:var(--gold); }
   .lang-btn[aria-pressed="true"]{ color:var(--gold); text-shadow:0 0 10px rgba(255,170,0,.5); }
