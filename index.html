@@ -121,8 +121,9 @@
   .tl-year{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:clamp(1.5rem,4.5vw,2.05rem); line-height:1; margin-bottom:10px; width:fit-content; max-width:100%; background:var(--rainbow); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; filter:drop-shadow(0 2px 8px #000a); }
   .tl-head .tl-year{ margin-bottom:0; }
   .tl-mods{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:.7rem; line-height:1; color:var(--gold); border:1px solid var(--line-w); border-radius:999px; padding:6px 12px; background:#140f02; white-space:nowrap; }
-  .tl-card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 22px; transition:transform .15s, border-color .15s, box-shadow .15s; }
+  .tl-card{ display:block; text-decoration:none; color:inherit; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 22px; transition:transform .15s, border-color .15s, box-shadow .15s; }
   .tl-card:hover{ transform:translateY(-2px); border-color:var(--gold); box-shadow:0 10px 34px rgba(255,170,0,.10); }
+  .tl-card:hover .tl-credits{ color:var(--gold); transform:translateX(2px); }
   .tl-card h3{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; color:var(--gold); font-size:1.08rem; line-height:1.25; margin-bottom:6px; }
   .tl-card p{ color:var(--mut); font-size:.96rem; }
   a.tl-mods{ transition:color .15s, border-color .15s, transform .15s, box-shadow .15s; }
@@ -198,10 +199,10 @@
     min-height:320px;                              /* erebos band height */
     margin:clamp(40px,7vw,72px) 0 0;
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    background-color:#000063;                      /* nyan deep-blue/indigo space */
+    background-color:transparent;                  /* stars sit on the page bg, no solid blue fill */
     background-image:url('/assets/nyan-stars.gif'); /* sparse twinkling plus-stars only */
     background-repeat:repeat;
-    background-size:1280px 320px;                  /* wide tile -> only a few stars across at once */
+    background-size:auto;                           /* native 1280x320 pixels - never scaled/stretched */
     background-position:0 0;
     animation:nyan-drift 30s linear infinite;      /* slow leftward star drift = nyan flight illusion */
   }
@@ -231,7 +232,7 @@
     margin-top:clamp(40px,7vw,72px);
     /* reserve vertical room so Dash perches above the line,
        not cut off and not crashing into the section above */
-    min-height:clamp(115px,16vw,210px);
+    min-height:clamp(144px,20vw,263px);
   }
   .dash-strip::after{
     content:''; position:absolute; left:0; right:0; bottom:0;
@@ -239,12 +240,12 @@
   }
   .dash-strip .dash{
     position:absolute; z-index:3; right:clamp(6px,3vw,40px); bottom:0;
-    width:clamp(140px,21vw,260px); height:auto; pointer-events:none;
+    width:clamp(175px,26vw,325px); height:auto; pointer-events:none;
     filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
   }
   @media (max-width:560px){
-    .dash-strip{ min-height:100px; }
-    .dash-strip .dash{ width:clamp(90px,26vw,120px); right:4px; }
+    .dash-strip{ min-height:125px; }
+    .dash-strip .dash{ width:clamp(112px,33vw,150px); right:4px; }
   }
 </style>
 </head>
@@ -286,26 +287,6 @@
   </a>
 </header>
 
-<section class="wrap">
-  <div class="rainbow-frame">
-    <div class="inner">
-      <h2 data-i18n-html="server.h2">Join the <span class="accent">public server</span></h2>
-      <p class="lead" style="margin:0 auto 4px;" data-i18n="server.lead">Hop straight into the official SkyTekx world with the rest of the ts3.party community.</p>
-      <div class="addr-wrap">
-        <button class="addr" type="button" data-copy="skytekx.com" onclick="copyAddr(this)" data-i18n-aria="server.addr.aria" aria-label="Copy server address skytekx.com">
-          skytekx.com
-          <span class="copy" data-i18n="server.addr.copy">click to copy</span>
-        </button>
-      </div>
-      <div class="pills server-meta">
-        <span class="pill" data-i18n="pill.mc">Minecraft 1.20.1</span>
-        <span class="pill" data-i18n="pill.forge">Forge</span>
-      </div>
-      <p class="sub" style="margin-top:18px;" data-i18n-html="server.join.note">Install the SkyTekx modpack first, then add <code>skytekx.com</code> as a server in your launcher.</p>
-    </div>
-  </div>
-</section>
-
 <section id="features" class="wrap">
   <h2 data-i18n-html="features.h2">One pack, <span class="accent">six pillars</span></h2>
   <p class="lead" data-i18n="features.lead">The SkyTekx identity: heavy tech, deep magic, and real adventure, built so the recipes never fight each other.</p>
@@ -338,12 +319,21 @@
 </section>
 
 <section class="wrap">
-  <div class="join">
-    <h2 data-i18n-html="step.h2">Get playing in <span class="accent">two minutes</span></h2>
-    <div class="steps">
-      <div class="step"><b>1 · <span data-i18n="step.play.1.title">Install.</span></b> <span data-i18n-html="step.play.1.text">Open the pack on <a href="https://modrinth.com/modpack/skytekx3" target="_blank" rel="noopener">Modrinth</a> and import the <code>.mrpack</code> into Prism, the Modrinth App, or ATLauncher.</span></div>
-      <div class="step"><b>2 · <span data-i18n="step.play.2.title">Launch.</span></b> <span data-i18n="step.play.2.text">Forge 1.20.1, Java 17, ~6 GB RAM. First launch builds the mod set.</span></div>
-      <div class="step"><b>3 · <span data-i18n="step.play.3.title">Reach the sky.</span></b> <span data-i18n-html="step.play.3.text">Spin up your first machines, then run <code>/trigger sktx_skylands</code> to ascend to the floating islands.</span></div>
+  <div class="rainbow-frame">
+    <div class="inner">
+      <h2 data-i18n-html="server.h2">Join the <span class="accent">public server</span></h2>
+      <p class="lead" style="margin:0 auto 4px;" data-i18n="server.lead">Hop straight into the official SkyTekx world with the rest of the ts3.party community.</p>
+      <div class="addr-wrap">
+        <button class="addr" type="button" data-copy="skytekx.com" onclick="copyAddr(this)" data-i18n-aria="server.addr.aria" aria-label="Copy server address skytekx.com">
+          skytekx.com
+          <span class="copy" data-i18n="server.addr.copy">click to copy</span>
+        </button>
+      </div>
+      <div class="pills server-meta">
+        <span class="pill" data-i18n="pill.mc">Minecraft 1.20.1</span>
+        <span class="pill" data-i18n="pill.forge">Forge</span>
+      </div>
+      <p class="sub" style="margin-top:18px;" data-i18n-html="server.join.note">Install the SkyTekx modpack first, then add <code>skytekx.com</code> as a server in your launcher.</p>
     </div>
   </div>
 </section>
@@ -433,33 +423,33 @@ ufw allow 25565/tcp</code></pre>
         <div class="tl-year">2019</div>
         <a class="tl-mods" href="/credits-1710.html">120&nbsp;<span data-i18n="timeline.mods">mods</span></a>
       </div>
-      <div class="tl-card">
+      <a class="tl-card" href="/credits-1710.html">
         <h3 data-i18n="timeline.2019.title">SkyTekx is born</h3>
         <p data-i18n="timeline.2019.text">The first pack lands on Minecraft 1.7.10 as the ts3.party ("ts3pp") community build, a mix of Tekkit, Hexxit and SkyFactory on a Forge+Bukkit (KCauldron) hybrid. Shipped through Technic, server-first and RCON-managed by the ts3.party crew.</p>
-        <a class="tl-credits" href="/credits-1710.html" data-i18n="timeline.credits">Mod credits &rarr;</a>
-      </div>
+        <span class="tl-credits" data-i18n="timeline.credits">Mod credits &rarr;</span>
+      </a>
     </div>
     <div class="tl-item">
       <div class="tl-head">
         <div class="tl-year">2023</div>
         <a class="tl-mods" href="/credits-1122.html">224&nbsp;<span data-i18n="timeline.mods">mods</span></a>
       </div>
-      <div class="tl-card">
+      <a class="tl-card" href="/credits-1122.html">
         <h3 data-i18n="timeline.2023.title">SkyTekx 2</h3>
         <p data-i18n="timeline.2023.text">Rebuilt for Minecraft 1.12.2 on the Mohist hybrid: roughly 200 mods running beside a full EssentialsX, LuckPerms and Multiverse plugin stack, plus an SB-Skylands skyblock.</p>
-        <a class="tl-credits" href="/credits-1122.html" data-i18n="timeline.credits">Mod credits &rarr;</a>
-      </div>
+        <span class="tl-credits" data-i18n="timeline.credits">Mod credits &rarr;</span>
+      </a>
     </div>
     <div class="tl-item">
       <div class="tl-head">
         <div class="tl-year">2026</div>
         <a class="tl-mods" href="/credits-1201.html">232&nbsp;<span data-i18n="timeline.mods">mods</span></a>
       </div>
-      <div class="tl-card">
+      <a class="tl-card" href="/credits-1201.html">
         <h3 data-i18n="timeline.2026.title">SkyTekx 3</h3>
         <p data-i18n="timeline.2026.text">A leap to modern Minecraft 1.20.1, Forge 47 on Arclight. 147 hand-curated, conflict-free mods and a bespoke custom Skylands floating-islands dimension.</p>
-        <a class="tl-credits" href="/credits-1201.html" data-i18n="timeline.credits">Mod credits &rarr;</a>
-      </div>
+        <span class="tl-credits" data-i18n="timeline.credits">Mod credits &rarr;</span>
+      </a>
     </div>
     <div class="tl-item">
       <div class="tl-year">Today</div>
