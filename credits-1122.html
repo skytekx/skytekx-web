@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkyTekx 2 · 1.12.2 — Mod Credits</title>
+<meta name="description" content="The complete mod and author credits for SkyTekx 2 · 1.12.2 (224 mods). Thank you to every mod author whose work makes SkyTekx possible.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" type="image/svg+xml" href="/assets/skytekx.svg">
+<style>
+  @font-face{ font-family:'Minecraft'; src:url('/assets/fonts/minecraft.woff2') format('woff2'),url('/assets/fonts/minecraft.woff') format('woff'); font-display:swap; }
+
+  :root{
+    --gold:#FFAA00; --gold-d:#cc8800; --bg:#0a0a0a; --panel:#111111; --panel2:#0e0e0e;
+    --line:#222222; --line-w:#3a2f15; --txt:#ececec; --mut:#9a9a9a;
+    --rainbow:linear-gradient(90deg,#FF0000,#FF9900,#FFFF00 35%,#00FF00 55%,#00FFFF 78%,#0000FF);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    font-family:system-ui,-apple-system,'Segoe UI',sans-serif; color:var(--txt);
+    background:radial-gradient(1100px 700px at 50% -8%, #161616 0%, transparent 62%), var(--bg);
+    background-attachment:fixed; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  body::before{ content:''; position:fixed; top:0; left:0; right:0; height:3px; background:var(--rainbow); z-index:50; transform-origin:left center; animation:loadbar 1.2s cubic-bezier(.15,.75,.25,1) both; }
+  @keyframes loadbar{ from{ transform:scaleX(0); } to{ transform:scaleX(1); } }
+  a{ color:var(--gold); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  .wrap{ max-width:1060px; margin:0 auto; padding:0 clamp(24px,5.5vw,60px); }
+
+  /* ---------- back link ---------- */
+  .topbar{ padding:34px 0 0; }
+  .back{
+    font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:.86rem;
+    display:inline-flex; align-items:center; gap:9px; color:var(--mut);
+    border:1px solid var(--line-w); border-radius:999px; padding:8px 16px; background:rgba(10,10,10,.6);
+    transition:color .15s, border-color .15s, transform .15s;
+  }
+  .back:hover{ color:var(--gold); border-color:var(--gold); transform:translateY(-1px); text-decoration:none; }
+
+  /* ---------- page head ---------- */
+  .page-head{ padding:30px 0 6px; }
+  .eyebrow{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.14em; font-size:.74rem; color:var(--gold-d); text-transform:uppercase; margin-bottom:14px; }
+  h1{
+    font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.05em;
+    font-size:clamp(2rem,7vw,3.2rem); line-height:1.04; padding:0 .04em;
+    background:var(--rainbow); -webkit-background-clip:text; background-clip:text;
+    -webkit-text-fill-color:transparent; color:transparent; filter:drop-shadow(0 3px 12px #000a);
+  }
+  .page-sub{ color:var(--txt); margin-top:16px; font-size:1.05rem; }
+  .page-sub b{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; color:var(--gold); font-weight:400; }
+  .thanks{ color:var(--mut); margin-top:10px; font-size:.98rem; max-width:680px; }
+
+  /* ---------- cross links ---------- */
+  .xlinks{ display:flex; flex-wrap:wrap; gap:10px; margin:24px 0 4px; }
+  .xlink{
+    font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; font-size:.78rem;
+    color:var(--gold); border:1px solid var(--line-w); border-radius:999px; padding:8px 15px; background:#140f02;
+    transition:color .15s, border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .xlink:hover{ border-color:var(--gold); transform:translateY(-1px); text-decoration:none; box-shadow:0 6px 20px rgba(255,170,0,.12); }
+  .xlink[aria-current="page"]{ color:#1a1200; background:var(--gold); border-color:var(--gold); }
+  .xlink[aria-current="page"]:hover{ transform:none; }
+
+  /* ---------- mod grid ---------- */
+  .mods-sec{ padding:30px 0 10px; }
+  .mod-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:12px; }
+  .mod{ background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold-d); border-radius:12px; padding:13px 16px; transition:transform .12s, border-color .12s, box-shadow .12s; }
+  .mod:hover{ transform:translateY(-2px); border-color:var(--gold); border-left-color:var(--gold); box-shadow:0 8px 26px rgba(255,170,0,.08); }
+  .mod .mname{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.02em; color:var(--gold); font-size:.9rem; line-height:1.35; word-break:break-word; }
+  .mod .mby{ color:var(--mut); font-size:.86rem; margin-top:4px; word-break:break-word; }
+  .mod .mby.none{ color:#6f6f6f; font-style:italic; }
+
+  /* ---------- footer (matches main page) ---------- */
+  footer{ text-align:center; color:var(--mut); padding:44px 0 60px; border-top:1px solid var(--line); margin-top:44px; font-size:.92rem; }
+  footer strong{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; color:var(--gold); font-weight:400; }
+  footer a{ color:var(--mut); } footer a:hover{ color:var(--gold); }
+  footer .disc{ margin-top:14px; font-size:.82rem; opacity:.65; }
+  footer .credits-row a{ color:var(--gold-d); }
+  footer .credits-row a:hover{ color:var(--gold); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a class="back" href="/">&larr; SkyTekx</a>
+  </div>
+
+  <div class="page-head">
+    <div class="eyebrow">Mod Credits</div>
+    <h1>SkyTekx 2 · 1.12.2</h1>
+    <p class="page-sub"><b>224</b> mods &middot; with thanks to their authors</p>
+    <p class="thanks">SkyTekx is a hand-curated mix, none of it exists without the modders below. Every mod here is the work of its respective author(s); huge thanks to all of them for building, maintaining, and sharing their mods with the community.</p>
+    <div class="xlinks">
+    <a class="xlink" href="/credits-1710.html">SkyTekx · 1.7.10</a>
+    <a class="xlink" href="/credits-1122.html" aria-current="page">SkyTekx 2 · 1.12.2</a>
+    <a class="xlink" href="/credits-1201.html">SkyTekx 3 · 1.20.1</a>
+    </div>
+  </div>
+
+  <div class="mods-sec">
+    <div class="mod-grid">
+    <div class="mod"><div class="mname">!mixinbooter-7.0</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">AI-Improvements</div><div class="mby">by Dmod</div></div>
+    <div class="mod"><div class="mname">ASMC</div><div class="mby">by AstroTibs</div></div>
+    <div class="mod"><div class="mname">Additional Banners</div><div class="mby">by Darkhax</div></div>
+    <div class="mod"><div class="mname">Akashic Tome</div><div class="mby">by Vazkii</div></div>
+    <div class="mod"><div class="mname">AppleSkin</div><div class="mby">by squeek</div></div>
+    <div class="mod"><div class="mname">Attribute Fix</div><div class="mby">by darkhax</div></div>
+    <div class="mod"><div class="mname">Atum-1.12.2-2.0.20</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">AutoRegLib</div><div class="mby">by Vazkii</div></div>
+    <div class="mod"><div class="mname">Battle Towers Fixes</div><div class="mby">by ACGaming</div></div>
+    <div class="mod"><div class="mname">AtomicStryker&#x27;s Battletowers</div><div class="mby">by See CREDITS file</div></div>
+    <div class="mod"><div class="mname">Baubles</div><div class="mby">by Azanor</div></div>
+    <div class="mod"><div class="mname">Better Builder&#x27;s Wands</div><div class="mby">by Portablejim</div></div>
+    <div class="mod"><div class="mname">YUNG&#x27;s Better Mineshafts</div><div class="mby">by YUNGNICKYOUNG</div></div>
+    <div class="mod"><div class="mname">BiblioCraft</div><div class="mby">by Joseph &#x27;Nuchaz&#x27; Sinclair</div></div>
+    <div class="mod"><div class="mname">Bird&#x27;s nests</div><div class="mby">by Cleverpanda714</div></div>
+    <div class="mod"><div class="mname">Bookshelf</div><div class="mby">by darkhax, lclc98</div></div>
+    <div class="mod"><div class="mname">Born In A Barn V1.8-1.12-1.1</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Botania</div><div class="mby">by Vazkii, williewillus, wiiv, dylan4ever</div></div>
+    <div class="mod"><div class="mname">Bountiful</div><div class="mby">by Ejektaflex</div></div>
+    <div class="mod"><div class="mname">Brandon&#x27;s Core</div><div class="mby">by brandon3055</div></div>
+    <div class="mod"><div class="mname">CTM</div><div class="mby">by tterrag, Drullkus, minecreatr</div></div>
+    <div class="mod"><div class="mname">Capsule</div><div class="mby">by Lythom</div></div>
+    <div class="mod"><div class="mname">Chameleon</div><div class="mby">by jaquadro</div></div>
+    <div class="mod"><div class="mname">Chest Transporter</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Chisel-MC1.12.2-1.0.2.45</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">ChocoCraft Plus</div><div class="mby">by AstroTibs</div></div>
+    <div class="mod"><div class="mname">Chocolate Quest Repoured Mod</div><div class="mby">by At first we want to thank and credit Chocolatin for creating the original Chocolate Quest and with that gave the base and motivation for this (even if this is a complete rewrite from scratch) Project Lead: &gt; ArloTheEpic Coders: &gt; DerToaster98 - Pretty much everything except some items and the randomized castles &gt; Meldexun - Entities &amp; everywhere a bit &gt; jdawg3636 - Assisting &amp; Fixing &gt; KalgogSmash - Castles &amp; Random structures &gt; MrMarnic - Protection System and Help with Tile-Entities &gt; Tiviacz1337 - Items Artists: &gt; Sir Squidly - Blocks &gt; Silentine - Items</div></div>
+    <div class="mod"><div class="mname">Classic Combat</div><div class="mby">by WildBamaBoy, SheWolfDeadly</div></div>
+    <div class="mod"><div class="mname">CoFH Core</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">CoFH World</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">CodeChicken Lib</div><div class="mby">by ChickenBones, covers1624</div></div>
+    <div class="mod"><div class="mname">CosmeticArmorReworked</div><div class="mby">by zlainsama</div></div>
+    <div class="mod"><div class="mname">CraftTweaker2</div><div class="mby">by StanHebben, Jaredlll08</div></div>
+    <div class="mod"><div class="mname">CreativeCore</div><div class="mby">by CreativeMD, N247S</div></div>
+    <div class="mod"><div class="mname">DrZhark&#x27;s CustomSpawner</div><div class="mby">by DrZhark, Bloodshot</div></div>
+    <div class="mod"><div class="mname">Damage Tilt</div><div class="mby">by Charles445</div></div>
+    <div class="mod"><div class="mname">Debark</div><div class="mby">by asie</div></div>
+    <div class="mod"><div class="mname">Decocraft</div><div class="mby">by RazzleberryFox</div></div>
+    <div class="mod"><div class="mname">Dimensional Doors</div><div class="mby">by StevenRS11, SenseiKiwi, Zixiken, WaterPicker, Robijnvogel, ZombieHDGaming, Runemoro</div></div>
+    <div class="mod"><div class="mname">DrZhark&#x27;s Mo&#x27;Creatures Mod</div><div class="mby">by DrZhark, BloodShot, BlockDaddy</div></div>
+    <div class="mod"><div class="mname">Draconic Evolution</div><div class="mby">by brandon3055</div></div>
+    <div class="mod"><div class="mname">DupeFix Project</div><div class="mby">by Focamacho</div></div>
+    <div class="mod"><div class="mname">Elementary Staffs</div><div class="mby">by KrokoOnAir</div></div>
+    <div class="mod"><div class="mname">Elenai Dodge</div><div class="mby">by Elenai</div></div>
+    <div class="mod"><div class="mname">Enchanting Plus</div><div class="mby">by Maintained by Darkhax</div></div>
+    <div class="mod"><div class="mname">EnderCore</div><div class="mby">by tterrag, CrazyPants, HenryLoenwind</div></div>
+    <div class="mod"><div class="mname">Ender IO</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Base</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Conduits</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid, HypherionSA</div></div>
+    <div class="mod"><div class="mname">Ender IO Powertools</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Applied Energistics Conduits</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Open Computers Conduits</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Refined Storage Conduits</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Integration with Forestry</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, EpicSquid, bdew, mezz</div></div>
+    <div class="mod"><div class="mname">Ender IO Integration with Tinkers&#x27; Construct</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Integration with Tinkers&#x27; Construct</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Inventory Panel</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid</div></div>
+    <div class="mod"><div class="mname">Ender IO Machines</div><div class="mby">by CrazyPants, tterrag, HenryLoenwind, MatthiasM, CyanideX, EpicSquid</div></div>
+    <div class="mod"><div class="mname">EnderStorage</div><div class="mby">by ChickenBones, covers1624</div></div>
+    <div class="mod"><div class="mname">EntityDesyncFix</div><div class="mby">by Meldexun</div></div>
+    <div class="mod"><div class="mname">Exchangers</div><div class="mby">by Jackyy, TurkeyDev</div></div>
+    <div class="mod"><div class="mname">experiencebugfix</div><div class="mby">by MacTso, Lupicus</div></div>
+    <div class="mod"><div class="mname">Eyes in the Darkness</div><div class="mby">by gigaherz</div></div>
+    <div class="mod"><div class="mname">Fantastic Lib</div><div class="mby">by Laike_Endaril</div></div>
+    <div class="mod"><div class="mname">Farming for Blockheads</div><div class="mby">by BlayTheNinth</div></div>
+    <div class="mod"><div class="mname">Farseek</div><div class="mby">by delvr</div></div>
+    <div class="mod"><div class="mname">FastFurnace</div><div class="mby">by Shadows_of_Fire</div></div>
+    <div class="mod"><div class="mname">FastLeafDecay-v14</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">FastWorkbench</div><div class="mby">by Shadows_of_Fire</div></div>
+    <div class="mod"><div class="mname">Forge Multipart CBE</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Minecraft Multipart Plugin</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Forge Microblocks</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Shadowfacts&#x27; Forgelin</div><div class="mby">by shadowfacts</div></div>
+    <div class="mod"><div class="mname">Galacticraft-Planets-1.12.2-4.0.2.280</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">GalacticraftCore-1.12.2-4.0.2.280</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">GunpowderLib</div><div class="mby">by Jackyy</div></div>
+    <div class="mod"><div class="mname">HaxyMocreaturesModAdder</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Hexxit World</div><div class="mby">by phantamanta44, Sslime7, NMcCoy</div></div>
+    <div class="mod"><div class="mname">Hexxit Gear</div><div class="mby">by Originally by sct. Artwork by Cheapshot.</div></div>
+    <div class="mod"><div class="mname">Waila</div><div class="mby">by ProfMobius, TehNut</div></div>
+    <div class="mod"><div class="mname">IC2Classic-1.12-1.5.6.1</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Infernal Mobs</div><div class="mby">by Forge devs</div></div>
+    <div class="mod"><div class="mname">Integration Foregoing</div><div class="mby">by Jackyy, Buuz135</div></div>
+    <div class="mod"><div class="mname">Item Damage Rebalancer</div><div class="mby">by Laike_Endaril</div></div>
+    <div class="mod"><div class="mname">IvToolkit</div><div class="mby">by Ivorius</div></div>
+    <div class="mod"><div class="mname">Just Another Rotten Flesh to Leather Mod</div><div class="mby">by ExampleDude</div></div>
+    <div class="mod"><div class="mname">Jon&#x27;s Exclusives</div><div class="mby">by Jon</div></div>
+    <div class="mod"><div class="mname">KleeSlabs</div><div class="mby">by BlayTheNinth</div></div>
+    <div class="mod"><div class="mname">LittleFrames</div><div class="mby">by CreativeMD</div></div>
+    <div class="mod"><div class="mname">LittleTiles</div><div class="mby">by CreativeMD, Shana</div></div>
+    <div class="mod"><div class="mname">LootTweaker</div><div class="mby">by Leviathan143</div></div>
+    <div class="mod"><div class="mname">Lost Books II</div><div class="mby">by FatherToast, WinDanesz</div></div>
+    <div class="mod"><div class="mname">LunatriusCore</div><div class="mby">by Lunatrius</div></div>
+    <div class="mod"><div class="mname">MCMultiPart-2.5.3</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Mantle</div><div class="mby">by boni, progWML6, Alexbegt</div></div>
+    <div class="mod"><div class="mname">MicdoodleCore-1.12.2-4.0.2.280</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">MmmMmmMmmMmm</div><div class="mby">by boni</div></div>
+    <div class="mod"><div class="mname">More Bows Restrung</div><div class="mby">by GaussFire, iDiamondhunter, Ninjamight, NeRd</div></div>
+    <div class="mod"><div class="mname">Nature&#x27;s Compass</div><div class="mby">by ChaosTheDude</div></div>
+    <div class="mod"><div class="mname">NetherPortalFix</div><div class="mby">by BlayTheNinth</div></div>
+    <div class="mod"><div class="mname">Netherending Ores</div><div class="mby">by ICannt Team</div></div>
+    <div class="mod"><div class="mname">NoMoreRecipeConflict</div><div class="mby">by stimmedcow, GotoLink</div></div>
+    <div class="mod"><div class="mname">Nyx</div><div class="mby">by Ellpeck</div></div>
+    <div class="mod"><div class="mname">OfflineSkins</div><div class="mby">by zlainsama</div></div>
+    <div class="mod"><div class="mname">OpenBlocks</div><div class="mby">by Mikee, NeverCast, boq, Lyqyd</div></div>
+    <div class="mod"><div class="mname">OpenModsLib</div><div class="mby">by Mikee, NeverCast, boq, Lyqyd</div></div>
+    <div class="mod"><div class="mname">Example Mod</div><div class="mby">by ExampleDude</div></div>
+    <div class="mod"><div class="mname">Pam&#x27;s HarvestCraft</div><div class="mby">by Pamela Collins</div></div>
+    <div class="mod"><div class="mname">Patchouli</div><div class="mby">by Vazkii</div></div>
+    <div class="mod"><div class="mname">Placebo</div><div class="mby">by Shadows_of_Fire</div></div>
+    <div class="mod"><div class="mname">Quark</div><div class="mby">by Vazkii, wiiv</div></div>
+    <div class="mod"><div class="mname">Reach Fix</div><div class="mby">by Meldexun</div></div>
+    <div class="mod"><div class="mname">Reborn Core</div><div class="mby">by modmuss50, Gigabit101, Prospector</div></div>
+    <div class="mod"><div class="mname">Recurrent Complex</div><div class="mby">by Ivorius</div></div>
+    <div class="mod"><div class="mname">Redstone Arsenal</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">Redstone Flux</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">Redwoods</div><div class="mby">by coderbot16</div></div>
+    <div class="mod"><div class="mname">Reforged</div><div class="mby">by ThexXTURBOXx, Silvercatcher</div></div>
+    <div class="mod"><div class="mname">Reliquary</div><div class="mby">by x3n0ph0b3, TheMike, P3pp3rF1y</div></div>
+    <div class="mod"><div class="mname">Roguelike Dungeons</div><div class="mby">by Greymerk, Fnar</div></div>
+    <div class="mod"><div class="mname">Ruins Spawning System</div><div class="mby">by See eternal glorious credits file</div></div>
+    <div class="mod"><div class="mname">Schematica</div><div class="mby">by Lunatrius</div></div>
+    <div class="mod"><div class="mname">Seared Ladder</div><div class="mby">by jbredwards</div></div>
+    <div class="mod"><div class="mname">Simply Jetpacks 2</div><div class="mby">by Tomson124, StormedPanda</div></div>
+    <div class="mod"><div class="mname">Skewers</div><div class="mby">by Casadis</div></div>
+    <div class="mod"><div class="mname">Soul Shards Respawn</div><div class="mby">by TehNut</div></div>
+    <div class="mod"><div class="mname">Spartan Shields</div><div class="mby">by ObliviousSpartan</div></div>
+    <div class="mod"><div class="mname">Storage Drawers</div><div class="mby">by jaquadro</div></div>
+    <div class="mod"><div class="mname">Tinkers&#x27; Construct</div><div class="mby">by boni, KnightMiner</div></div>
+    <div class="mod"><div class="mname">Thermal Dynamics</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">Thermal Expansion</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">Thermal Foundation</div><div class="mby">by Team CoFH</div></div>
+    <div class="mod"><div class="mname">Tinkers Tool Leveling</div><div class="mby">by boni</div></div>
+    <div class="mod"><div class="mname">Tinkers&#x27; Addons</div><div class="mby">by oitsjustjose</div></div>
+    <div class="mod"><div class="mname">TinkersOreDictCache</div><div class="mby">by youyihj</div></div>
+    <div class="mod"><div class="mname">Traverse</div><div class="mby">by Prospector</div></div>
+    <div class="mod"><div class="mname">UniDict-1.12.2-3.0.10</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">WirelessRedstone-CBE</div><div class="mby">by ChickenBones</div></div>
+    <div class="mod"><div class="mname">WanionLib</div><div class="mby">by WanionCane</div></div>
+    <div class="mod"><div class="mname">Waystones</div><div class="mby">by BlayTheNinth</div></div>
+    <div class="mod"><div class="mname">bspkrsCore</div><div class="mby">by DaftPVF, bspkrs, Lunatrius, BlueAnanas, ZenCoder, vrackfall, Rires_Magica</div></div>
+    <div class="mod"><div class="mname">Mixin Compatibility</div><div class="mby">by NotStirred</div></div>
+    <div class="mod"><div class="mname">The Aether</div><div class="mby">by bconlon, Oscar Payn, Hugo Payn, JellySquid</div></div>
+    <div class="mod"><div class="mname">Animania</div><div class="mby">by RazzleberryFox, Purplicious_Cow, cy4n, Tschipp, ZeAmateis, Timmypote, Raptorfarian, vroulas, and TheJurassicAlien</div></div>
+    <div class="mod"><div class="mname">animania-1.12.2-extra-1.0.2.28</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">animania-1.12.2-farm-1.0.2.28</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Applied Energistics 2</div><div class="mby">by AlgorithmX2</div></div>
+    <div class="mod"><div class="mname">Asgard Shield Reloaded</div><div class="mby">by ManGregory</div></div>
+    <div class="mod"><div class="mname">Backpack</div><div class="mby">by Eydamos</div></div>
+    <div class="mod"><div class="mname">Bad Wither No Cookie! Reloaded</div><div class="mby">by droidicus, kreezxil</div></div>
+    <div class="mod"><div class="mname">Better Invisibility</div><div class="mby">by Purplicious_Cow, cy4n</div></div>
+    <div class="mod"><div class="mname">Bigger Packets, please !</div><div class="mby">by ElNounch</div></div>
+    <div class="mod"><div class="mname">Blockcraftery</div><div class="mby">by Elucent, EpicSquid</div></div>
+    <div class="mod"><div class="mname">BuildCraft Lib</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Builders</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Energy</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Factory</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Silicon</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Transport</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Robotics</div><div class="mby">by SpaceToad, BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">BuildCraft Compat</div><div class="mby">by BuildCraft Team</div></div>
+    <div class="mod"><div class="mname">Cake Chomps</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">CC: Tweaked</div><div class="mby">by Daniel Ratcliffe, Aaron Mills, SquidDev</div></div>
+    <div class="mod"><div class="mname">CC: Tweaked</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Chunk Generation Limiter</div><div class="mby">by Barteks2x</div></div>
+    <div class="mod"><div class="mname">Colytra</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">Combustive Fishing</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">Comforts</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">Construct&#x27;s Armory</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">Creeper Confetti</div><div class="mby">by SR2610</div></div>
+    <div class="mod"><div class="mname">Culinary Construct</div><div class="mby">by C4</div></div>
+    <div class="mod"><div class="mname">CyclopsTek</div><div class="mby">by Tango Tek</div></div>
+    <div class="mod"><div class="mname">Deadly World</div><div class="mby">by Father Toast</div></div>
+    <div class="mod"><div class="mname">Energy Converters</div><div class="mby">by xalcon</div></div>
+    <div class="mod"><div class="mname">Extra Utilities 2</div><div class="mby">by RWTema</div></div>
+    <div class="mod"><div class="mname">Fairy Lights</div><div class="mby">by pau101</div></div>
+    <div class="mod"><div class="mname">Fence Jumper</div><div class="mby">by p455w0rd aka TheRealp455w0rd</div></div>
+    <div class="mod"><div class="mname">FoamFix</div><div class="mby">by asiekierka</div></div>
+    <div class="mod"><div class="mname">MrCrayfish&#x27;s Furniture Mod</div><div class="mby">by MrCrayfish</div></div>
+    <div class="mod"><div class="mname">GeckoLib</div><div class="mby">by Gecko, Eliot, AzureDoom, McHorse, DerToaster</div></div>
+    <div class="mod"><div class="mname">Gravel Ores</div><div class="mby">by Elucent</div></div>
+    <div class="mod"><div class="mname">iChunUtil</div><div class="mby">by iChun</div></div>
+    <div class="mod"><div class="mname">Industrial Foregoing</div><div class="mby">by Buuz135</div></div>
+    <div class="mod"><div class="mname">InstantUnify</div><div class="mby">by MrRiegel</div></div>
+    <div class="mod"><div class="mname">inventorysorter-1.12.2-1.13.4+1</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">ironchest-1.12.2-7.0.72.847</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Just Enough Items</div><div class="mby">by mezz</div></div>
+    <div class="mod"><div class="mname">Just Enough Pattern Banners</div><div class="mby">by Lorexe</div></div>
+    <div class="mod"><div class="mname">K4Lib</div><div class="mby">by K4Unl</div></div>
+    <div class="mod"><div class="mname">LemonLib</div><div class="mby">by Lemons</div></div>
+    <div class="mod"><div class="mname">LLibrary</div><div class="mby">by iLexiconn, gegy1000</div></div>
+    <div class="mod"><div class="mname">LoliASM</div><div class="mby">by Rongmario</div></div>
+    <div class="mod"><div class="mname">Lumen</div><div class="mby">by River Leviathan, Pyrofab, Mysticpasta1</div></div>
+    <div class="mod"><div class="mname">mc-locale-fix-1.0</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Mystical Lib</div><div class="mby">by EpicSquid, Elucent</div></div>
+    <div class="mod"><div class="mname">Natura</div><div class="mby">by mDiyo, Slime Knights</div></div>
+    <div class="mod"><div class="mname">nvlforcefields-1.12.2.2491.1.0</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Oreberries</div><div class="mby">by Joseph C. Sible</div></div>
+    <div class="mod"><div class="mname">PackCrashInfo</div><div class="mby">by BloodWorkXGaming</div></div>
+    <div class="mod"><div class="mname">Shield Parrying</div><div class="mby">by Drullkus</div></div>
+    <div class="mod"><div class="mname">phosphor-1.12.2-0.2.6+build50-universal</div><div class="mby none">author: see mod page</div></div>
+    <div class="mod"><div class="mname">Placeable Items Mod</div><div class="mby">by Ferdz, MasterianoX</div></div>
+    <div class="mod"><div class="mname">Player Plates</div><div class="mby">by Gaz492</div></div>
+    <div class="mod"><div class="mname">PlusTiC</div><div class="mby">by Landmaster (phuong0429)</div></div>
+    <div class="mod"><div class="mname">Railcraft</div><div class="mby">by CovertJaguar</div></div>
+    <div class="mod"><div class="mname">RandomPatches</div><div class="mby">by TheRandomLabs</div></div>
+    <div class="mod"><div class="mname">Rare Ice</div><div class="mby">by shedaniel</div></div>
+    <div class="mod"><div class="mname">Save My Stronghold!</div><div class="mby">by YUNGNICKYOUNG</div></div>
+    <div class="mod"><div class="mname">Secret Rooms 5</div><div class="mby">by Wyn Price</div></div>
+    <div class="mod"><div class="mname">Special Mobs</div><div class="mby">by Father Toast</div></div>
+    <div class="mod"><div class="mname">Statues</div><div class="mby">by Lemons</div></div>
+    <div class="mod"><div class="mname">SwingThroughGrass</div><div class="mby">by Exidex</div></div>
+    <div class="mod"><div class="mname">Tesla Core Lib</div><div class="mby">by Face_of_Cat</div></div>
+    <div class="mod"><div class="mname">Tesla Core Lib Registries</div><div class="mby">by Face_of_Cat</div></div>
+    <div class="mod"><div class="mname">Tinker&#x27;s JEI</div><div class="mby">by possible_triangle</div></div>
+    <div class="mod"><div class="mname">Too Many Efficiency Losses</div><div class="mby">by CaffeinatedPinkie</div></div>
+    <div class="mod"><div class="mname">TorchMaster</div><div class="mby">by xalcon</div></div>
+    <div class="mod"><div class="mname">Trumpet Skeleton</div><div class="mby">by JamiesWhiteShirt</div></div>
+    <div class="mod"><div class="mname">Tumbleweed</div><div class="mby">by konwboy</div></div>
+    <div class="mod"><div class="mname">The Twilight Forest</div><div class="mby">by Benimatic, AtomicBlom, Drullkus, Killer_Demon, quadraxis, Tamaized, williewillus</div></div>
+    <div class="mod"><div class="mname">The Weirding Gadget</div><div class="mby">by AtomicBlom, Rorax</div></div>
+    <div class="mod"><div class="mname">Worse Barrels</div><div class="mby">by quaternary</div></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><strong>SkyTekx</strong>, a modpack by <span style="color:var(--gold)">ts4.party</span>, the TeamSpeak for party, formerly known as ts3.party.</p>
+    <p style="margin-top:10px;"><a href="https://modrinth.com/modpack/skytekx3" target="_blank" rel="noopener">Modrinth</a> &middot; <a href="https://github.com/skytekx" target="_blank" rel="noopener">GitHub</a> &middot; <a href="/impressum.html">Impressum</a></p>
+    <p class="credits-row" style="margin-top:8px;">
+      <a href="/credits-1710.html">Credits &middot; 1.7.10</a> &middot;
+      <a href="/credits-1122.html">Credits &middot; 1.12.2</a> &middot;
+      <a href="/credits-1201.html">Credits &middot; 1.20.1</a>
+    </p>
+    <p style="margin-top:8px;">
+      <a href="https://github.com/skytekx/skytekx-1710-server" target="_blank" rel="noopener">SkyTekx &middot; 1.7.10</a> &middot;
+      <a href="https://github.com/skytekx/skytekx2-1122-server" target="_blank" rel="noopener">SkyTekx 2 &middot; 1.12.2</a> &middot;
+      <a href="https://github.com/skytekx/skytekx3-1201-server" target="_blank" rel="noopener">SkyTekx 3 &middot; 1.20.1</a>
+    </p>
+    <p style="margin-top:10px;">Powered by <a href="https://netsnek.com" target="_blank" rel="noopener">netsnek.com</a></p>
+    <p class="disc">Minecraft is a trademark of Mojang AB. SkyTekx is an unofficial fan modpack, not affiliated with Mojang.</p>
+  </div>
+</footer>
+</body>
+</html>
