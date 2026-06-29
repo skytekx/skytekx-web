@@ -45,7 +45,7 @@
   .mc{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; }
 
   /* ---------- language toggle ---------- */
-  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:rgba(10,10,10,.72); border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); box-shadow:0 4px 16px rgba(0,0,0,.4); }
+  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:#141414; border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; box-shadow:0 4px 16px rgba(0,0,0,.4); }   /* opaque pill: no backdrop-filter (iOS Safari fixed+blur smears a translucent band on scroll) */
   .lang-btn{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.05em; font-size:.8rem; color:var(--mut); background:none; border:none; cursor:pointer; padding:2px 6px; border-radius:6px; transition:color .15s, text-shadow .15s; }
   .lang-btn:hover{ color:var(--gold); }
   .lang-btn[aria-pressed="true"]{ color:var(--gold); text-shadow:0 0 10px rgba(255,170,0,.5); }
@@ -201,13 +201,13 @@
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
     background-color:transparent;                  /* stars sit on the page bg, no solid blue fill */
     background-image:url('/assets/nyan-stars.gif?v=10'); /* plus-stars (3px blocks, ~half nyancat pixel) that grow from a dot; ?v busts browser cache when the GIF changes */
-    background-repeat:repeat;
+    background-repeat:repeat-x;                     /* tile horizontally only; vertical handled by position */
     background-size:auto;                           /* native 1280x320 pixels - never scaled/stretched */
-    background-position:0 0;
+    background-position-y:0;                        /* desktop band == tile height; x is animated below */
     animation:nyan-drift 30s linear infinite;      /* slow leftward star drift = nyan flight illusion */
   }
-  /* scroll exactly one tile-width per loop so the repeat stays seamless; the cat never moves */
-  @keyframes nyan-drift{ from{ background-position:0 0; } to{ background-position:-1280px 0; } }
+  /* scroll exactly one tile-width per loop so the repeat stays seamless; the cat never moves; only X animates so Y can center on mobile */
+  @keyframes nyan-drift{ from{ background-position-x:0; } to{ background-position-x:-1280px; } }
   .nyan-band .cat{
     position:absolute; z-index:2; top:50%; transform:translateY(-50%);
     right:clamp(16px,5vw,80px);
@@ -220,7 +220,7 @@
     .nyan-band{ background-image:url('/assets/nyan-stars.png?v=10'); animation:none; } /* freeze twinkle + scroll */
   }
   @media (max-width:560px){
-    .nyan-band{ min-height:228px; }
+    .nyan-band{ min-height:228px; background-position-y:center; }   /* center the 320px tile in the shorter band so star rows aren't clipped/top-padded */
   }
 
   /* ---------- rainbow dash strip (above footer) ---------- */
@@ -470,7 +470,7 @@ ufw allow 25565/tcp</code></pre>
       <div class="chips">
         <a href="https://github.com/Leebill15" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/Leebill15.png" alt="" loading="lazy" width="26" height="26">Leebill15</span></a>
         <a href="https://github.com/supi1290" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/supi1290.jpg" alt="" loading="lazy" width="26" height="26">supi1290</span></a>
-        <a href="https://github.com/simonprast" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/dermrsimon.png" alt="" loading="lazy" width="26" height="26">dermrsimon</span></a>
+        <a href="https://github.com/simonprast" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/dermrsimon.png?v=2" alt="" loading="lazy" width="26" height="26">dermrsimon</span></a>
         <a href="https://github.com/Brooffensive" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/Brooffensive.png" alt="" loading="lazy" width="26" height="26">Brooffensive</span></a>
         <a href="https://github.com/Yuuuux" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/Yuuux.jpg" alt="" loading="lazy" width="26" height="26">Yuuux</span></a>
         <a href="https://github.com/kleberbaum" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/kleberboy.jpg" alt="" loading="lazy" width="26" height="26">kleberboy</span></a>
@@ -483,7 +483,7 @@ ufw allow 25565/tcp</code></pre>
         <a href="https://github.com/kleberbaum" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/kleberbaum.jpg" alt="" loading="lazy" width="26" height="26">kleberbaum</span></a>
         <a href="https://github.com/supi1290" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/supi1290.jpg" alt="" loading="lazy" width="26" height="26">supi1290</span></a>
         <a href="https://github.com/KleberAlexander" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/ThunderboltOP.png" alt="" loading="lazy" width="26" height="26">ThunderboltOP</span></a>
-        <a href="https://github.com/Atlas859" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/Atlas859.png" alt="" loading="lazy" width="26" height="26">Atlas859</span></a>
+        <a href="https://github.com/Domhoff859" target="_blank" rel="noopener"><span class="chip"><img class="avatar" src="assets/devs/Atlas859.png?v=2" alt="" loading="lazy" width="26" height="26">Atlas859</span></a>
         <span class="chip"><img class="avatar" src="assets/devs/placeholder.svg" alt="" loading="lazy" width="26" height="26">Slayer5934 (Tekxit 3.14)</span>
       </div>
       <a class="tl-credits" href="/credits-1122.html" data-i18n="timeline.credits">Mod credits &rarr;</a>

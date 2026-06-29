@@ -81,7 +81,7 @@
   footer .credits-row a:hover{ color:var(--gold); }
 
   /* ---------- language toggle (matches main page) ---------- */
-  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:rgba(10,10,10,.72); border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); box-shadow:0 4px 16px rgba(0,0,0,.4); }
+  .lang-toggle{ position:fixed; top:12px; right:16px; z-index:60; display:flex; align-items:center; gap:5px; background:#141414; border:1px solid var(--line-w); border-radius:999px; padding:5px 11px; box-shadow:0 4px 16px rgba(0,0,0,.4); }   /* opaque pill: no backdrop-filter (iOS Safari fixed+blur smears a translucent band on scroll) */
   .lang-btn{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.05em; font-size:.8rem; color:var(--mut); background:none; border:none; cursor:pointer; padding:2px 6px; border-radius:6px; transition:color .15s, text-shadow .15s; }
   .lang-btn:hover{ color:var(--gold); }
   .lang-btn[aria-pressed="true"]{ color:var(--gold); text-shadow:0 0 10px rgba(255,170,0,.5); }
