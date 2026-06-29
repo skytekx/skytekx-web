@@ -118,7 +118,9 @@
   .timeline::before{ content:''; position:absolute; left:5px; top:8px; bottom:8px; width:3px; border-radius:3px; background:var(--rainbow); }
   .tl-item{ position:relative; padding:0 0 28px 38px; }
   .tl-item:last-child{ padding-bottom:0; }
-  .tl-item::before{ content:''; position:absolute; left:0; top:7px; width:13px; height:13px; border-radius:50%; background:var(--gold); border:2px solid var(--bg); box-shadow:0 0 0 3px rgba(255,170,0,.18); }
+  /* timeline marker = animated white plus-star (nyancat style), centered exactly on the 6.5px rainbow line */
+  .tl-item::before{ content:''; position:absolute; left:6.5px; top:13.5px; transform:translate(-50%,-50%); width:21px; height:21px; background:url('/assets/tl-star.gif') center/contain no-repeat; image-rendering:pixelated; }
+  @media (prefers-reduced-motion:reduce){ .tl-item::before{ background-image:url('/assets/tl-star.png'); } }
   .tl-head{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
   .tl-year{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:clamp(1.5rem,4.5vw,2.05rem); line-height:1.3; padding-bottom:.08em; margin-bottom:16px; width:fit-content; max-width:100%; background:var(--rainbow); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; filter:drop-shadow(0 2px 8px #000a); }
   .tl-head .tl-year{ margin-bottom:0; }
