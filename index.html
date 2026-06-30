@@ -182,12 +182,12 @@
   .scard p{ color:var(--mut); font-size:.94rem; margin-bottom:12px; }
   .scard pre{ overflow-x:auto; background:#000; border:1px solid var(--line-w); border-radius:8px; padding:12px 14px; margin:0; }
   .scard pre code{ border:none; background:none; padding:0; color:var(--gold); white-space:pre; font-size:.84rem; line-height:1.55; }
-  /* code snippet = a click-to-copy block that mirrors the server-address button: whole outline turns green */
-  .codewrap{ position:relative; min-width:0; cursor:pointer; }
-  .codewrap pre{ transition:border-color .15s; }
-  .codecopy{ position:absolute; bottom:10px; right:11px; font-family:system-ui,-apple-system,sans-serif; letter-spacing:0; font-size:.62rem; color:var(--mut); background:#000; border:1px solid var(--line-w); border-radius:6px; padding:4px 9px; white-space:nowrap; pointer-events:none; transition:color .15s, border-color .15s; }
+  /* code snippet = a click-to-copy box mirroring the server-address button: the WHOLE box turns green and the tag sits centered BELOW the code, never overlapping it */
+  .codewrap{ min-width:0; cursor:pointer; background:#000; border:1px solid var(--line-w); border-radius:8px; padding:12px 14px; transition:border-color .15s; }
+  .codewrap pre{ overflow-x:auto; background:none; border:none; border-radius:0; padding:0; margin:0; }
+  .codecopy{ display:block; width:fit-content; margin:11px auto 0; font-family:system-ui,-apple-system,sans-serif; letter-spacing:0; font-size:.62rem; color:var(--mut); border:1px solid var(--line-w); border-radius:6px; padding:5px 10px; white-space:nowrap; pointer-events:none; transition:color .15s, border-color .15s; }
   .codewrap:hover .codecopy{ color:var(--gold); border-color:var(--gold-d); }
-  .codewrap.copied pre{ border-color:#00FF00; }
+  .codewrap.copied{ border-color:#00FF00; }
   .codewrap.copied .codecopy{ color:#00FF00; border-color:#00FF00; }
   .setup-foot{ margin-top:24px; text-align:center; }
   .repos{ margin-top:14px; display:flex; gap:10px 16px; justify-content:center; flex-wrap:wrap; }
