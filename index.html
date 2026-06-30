@@ -100,8 +100,9 @@
   .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); gap:16px; }
   .card{ position:relative; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:24px; transition:transform .15s, border-color .15s, box-shadow .15s; }
   .card:hover{ transform:translateY(-3px); border-color:var(--gold); box-shadow:0 10px 34px rgba(255,170,0,.10); }
-  .card .ico{ width:30px; height:30px; display:block; color:var(--gold); }
+  .card .ico{ width:30px; height:30px; display:block; margin:0 auto; color:var(--gold); }
   .card h3{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; color:var(--gold); margin:14px 0 8px; font-size:1.12rem; line-height:1.25; }
+  .card:has(.ico) h3{ text-align:center; }   /* centre the title on the six pillar cards (icon already centred) */
   .card p{ color:var(--mut); font-size:.95rem; }
   .card .mods{ margin-top:12px; font-size:.82rem; color:var(--gold-d); }
 
@@ -120,8 +121,8 @@
   .tl-item:last-child{ padding-bottom:0; }
   /* timeline marker = animated white plus-star (nyancat style), centered exactly on the 6.5px rainbow line */
   /* top tracks the year font's digit centre (the .tl-year line-height:1.3 descender fix shifted the text down) so the star stays vertically centred on the year */
-  .tl-item::before{ content:''; position:absolute; left:6.5px; top:calc(0.56 * clamp(1.5rem,4.5vw,2.05rem)); transform:translate(-50%,-50%) rotate(45deg); width:21px; height:21px; background:url('/assets/tl-star.gif?v=3') center/contain no-repeat; image-rendering:pixelated; }
-  @media (prefers-reduced-motion:reduce){ .tl-item::before{ background-image:url('/assets/tl-star.png?v=3'); } }
+  .tl-item::before{ content:''; position:absolute; left:6.5px; top:calc(0.56 * clamp(1.5rem,4.5vw,2.05rem) + 3px); transform:translate(-50%,-50%) rotate(45deg); width:21px; height:21px; background:url('/assets/tl-star.gif?v=4') center/contain no-repeat; image-rendering:pixelated; }
+  @media (prefers-reduced-motion:reduce){ .tl-item::before{ background-image:url('/assets/tl-star.png?v=4'); } }
   .tl-head{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
   .tl-year{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:clamp(1.5rem,4.5vw,2.05rem); line-height:1.3; padding-bottom:.08em; margin-bottom:16px; width:fit-content; max-width:100%; background:var(--rainbow); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; filter:drop-shadow(0 2px 8px #000a); }
   .tl-head .tl-year{ margin-bottom:0; }
@@ -163,8 +164,6 @@
       font-size:clamp(1.05rem,6.2vw,1.9rem); padding:13px 16px; word-break:break-word;
     }
     .addr .copy{ font-size:.62rem; }
-    /* run-your-own steps: stack the number above the text on mobile */
-    .scard{ grid-template-columns:1fr; gap:12px; padding:18px 18px; }
   }
 
   /* ---------- run your own ---------- */
@@ -241,7 +240,7 @@
     margin-top:clamp(40px,7vw,72px);
     /* reserve vertical room so Dash perches above the line,
        not cut off and not crashing into the section above */
-    min-height:clamp(144px,20vw,263px);
+    min-height:clamp(150px,30vw,270px);
   }
   .dash-strip::after{
     content:''; position:absolute; left:0; right:0; bottom:0;
@@ -249,7 +248,7 @@
   }
   .dash-strip .dash{
     position:absolute; z-index:3; right:clamp(6px,3vw,40px); bottom:0;
-    width:clamp(175px,26vw,325px); height:auto; pointer-events:none;
+    width:clamp(175px,38vw,325px); height:auto; pointer-events:none;
     filter:drop-shadow(0 7px 15px rgba(0,0,0,.55));
   }
   @media (max-width:560px){
@@ -257,6 +256,9 @@
     .dash-strip .dash{ width:clamp(168px,50vw,225px); right:4px; }
     .btn.stack-m{ flex-direction:column; gap:8px; }
     .btn.stack-m svg{ width:26px; height:26px; }
+    /* run-your-own steps: number stacked above the text on mobile.
+       placed AFTER the base .scard rule so equal-specificity source order lets it win */
+    .scard{ grid-template-columns:1fr; gap:12px; padding:18px 18px; }
   }
 </style>
 </head>
