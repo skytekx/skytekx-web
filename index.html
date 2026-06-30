@@ -103,7 +103,7 @@
   .card .ico{ width:30px; height:30px; display:block; color:var(--gold); }
   .card h3{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; color:var(--gold); margin:14px 0 8px; font-size:1.12rem; line-height:1.25; }
   /* pillar cards: icon and title share the first line, description + mods span below */
-  .card:has(.ico){ display:grid; grid-template-columns:auto 1fr; column-gap:13px; align-items:center; }
+  .card:has(.ico){ display:grid; grid-template-columns:auto 1fr; column-gap:13px; align-items:center; align-content:start; }   /* start: cards stretched to equal height keep the title row pinned to the top so all six headings share one baseline */
   .card:has(.ico) .ico{ width:44px; height:44px; padding:10px; box-sizing:border-box; background:#140f02; border:1px solid var(--line-w); border-radius:12px; transition:border-color .15s, background .15s; }
   .card:has(.ico):hover .ico{ border-color:var(--gold-d); background:#1c1405; }
   .card:has(.ico) h3{ margin:0; }
@@ -182,6 +182,9 @@
   .scard p{ color:var(--mut); font-size:.94rem; margin-bottom:12px; }
   .scard pre{ overflow-x:auto; background:#000; border:1px solid var(--line-w); border-radius:8px; padding:12px 14px; margin:0; }
   .scard pre code{ border:none; background:none; padding:0; color:var(--gold); white-space:pre; font-size:.84rem; line-height:1.55; }
+  .codewrap{ position:relative; min-width:0; }
+  .codecopy{ position:absolute; top:8px; right:8px; font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:.6rem; color:var(--mut); background:#140f02; border:1px solid var(--line-w); border-radius:7px; padding:4px 9px; cursor:pointer; transition:color .15s, border-color .15s; }
+  .codecopy:hover,.codecopy.ok{ color:var(--gold); border-color:var(--gold-d); }
   .setup-foot{ margin-top:24px; text-align:center; }
   .repos{ margin-top:14px; display:flex; gap:10px 16px; justify-content:center; flex-wrap:wrap; }
   .repos a{ font-size:.88rem; }
@@ -262,9 +265,12 @@
     .dash-strip .dash{ width:clamp(168px,50vw,225px); right:4px; }
     .btn.stack-m{ flex-direction:column; gap:8px; }
     .btn.stack-m svg{ width:26px; height:26px; }
-    /* run-your-own steps: number stacked above the text on mobile.
-       placed AFTER the base .scard rule so equal-specificity source order lets it win */
-    .scard{ grid-template-columns:1fr; gap:12px; padding:18px 18px; }
+    /* run-your-own steps on mobile: number sits beside the heading, body spans full width (mirrors the pillar cards) */
+    .scard{ column-gap:13px; row-gap:0; align-items:center; align-content:start; padding:18px; }
+    .scard > div{ display:contents; }
+    .scard h3{ margin:0; }
+    .scard p{ grid-column:1 / -1; min-width:0; margin:13px 0 12px; }
+    .scard .codewrap, .scard pre{ grid-column:1 / -1; min-width:0; }
   }
 </style>
 </head>
@@ -561,6 +567,35 @@ function copyAddr(el){
     document.body.removeChild(ta); done();
   }
 }
+/* generic clipboard helper, shared by the code-snippet copy buttons */
+function copyText(text, done){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(done);
+  } else {
+    var ta=document.createElement('textarea');
+    ta.value=text; ta.setAttribute('readonly',''); ta.style.position='absolute'; ta.style.left='-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta); done();
+  }
+}
+/* give every run-your-own code snippet a copy button */
+(function(){
+  document.querySelectorAll('.scard pre').forEach(function(pre){
+    var wrap=document.createElement('div'); wrap.className='codewrap';
+    pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
+    var btn=document.createElement('button'); btn.type='button'; btn.className='codecopy';
+    btn.textContent='copy'; btn.setAttribute('aria-label','Copy code');
+    wrap.appendChild(btn);
+    btn.addEventListener('click', function(){
+      var code=pre.querySelector('code');
+      copyText(code?code.textContent:pre.textContent, function(){
+        btn.classList.add('ok'); btn.textContent='copied!';
+        setTimeout(function(){ btn.classList.remove('ok'); btn.textContent='copy'; }, 1600);
+      });
+    });
+  });
+})();
 /* community cards forward to their credits page on click; chip GitHub links are the only exception */
 (function(){
   document.querySelectorAll('.card').forEach(function(card){
