@@ -189,6 +189,14 @@
   .codewrap:hover .codecopy{ color:var(--gold); border-color:var(--gold-d); }
   .codewrap.copied{ border-color:#00FF00; }
   .codewrap.copied .codecopy{ color:#00FF00; border-color:#00FF00; }
+  /* run-your-own steps switch to number-beside-heading + full-width body well before phone size: the desktop two-column scard gets cramped under ~1050px */
+  @media (max-width:1050px){
+    .scard{ column-gap:13px; row-gap:0; align-items:center; align-content:start; }
+    .scard > div{ display:contents; }
+    .scard h3{ margin:0; }
+    .scard p{ grid-column:1 / -1; min-width:0; margin:13px 0 12px; }
+    .scard .codewrap, .scard pre{ grid-column:1 / -1; min-width:0; }
+  }
   .setup-foot{ margin-top:24px; text-align:center; }
   .repos{ margin-top:14px; display:flex; gap:10px 16px; justify-content:center; flex-wrap:wrap; }
   .repos a{ font-size:.88rem; }
@@ -269,12 +277,6 @@
     .dash-strip .dash{ width:clamp(168px,50vw,225px); right:4px; }
     .btn.stack-m{ flex-direction:column; gap:8px; }
     .btn.stack-m svg{ width:26px; height:26px; }
-    /* run-your-own steps on mobile: number sits beside the heading, body spans full width (mirrors the pillar cards) */
-    .scard{ column-gap:13px; row-gap:0; align-items:center; align-content:start; padding:18px; }
-    .scard > div{ display:contents; }
-    .scard h3{ margin:0; }
-    .scard p{ grid-column:1 / -1; min-width:0; margin:13px 0 12px; }
-    .scard .codewrap, .scard pre{ grid-column:1 / -1; min-width:0; }
   }
 </style>
 </head>
