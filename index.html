@@ -104,7 +104,8 @@
   .card h3{ font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.03em; color:var(--gold); margin:14px 0 8px; font-size:1.12rem; line-height:1.25; }
   /* pillar cards: icon and title share the first line, description + mods span below */
   .card:has(.ico){ display:grid; grid-template-columns:auto 1fr; column-gap:13px; align-items:center; }
-  .card:has(.ico) .ico{ width:44px; height:44px; padding:10px; box-sizing:border-box; background:#140f02; border:1px solid var(--line-w); border-radius:12px; }
+  .card:has(.ico) .ico{ width:44px; height:44px; padding:10px; box-sizing:border-box; background:#140f02; border:1px solid var(--line-w); border-radius:12px; transition:border-color .15s, background .15s; }
+  .card:has(.ico):hover .ico{ border-color:var(--gold-d); background:#1c1405; }
   .card:has(.ico) h3{ margin:0; }
   .card:has(.ico) p{ grid-column:1 / -1; margin-top:14px; }
   .card:has(.ico) .mods{ grid-column:1 / -1; }
