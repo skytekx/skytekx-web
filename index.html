@@ -182,10 +182,13 @@
   .scard p{ color:var(--mut); font-size:.94rem; margin-bottom:12px; }
   .scard pre{ overflow-x:auto; background:#000; border:1px solid var(--line-w); border-radius:8px; padding:12px 14px; margin:0; }
   .scard pre code{ border:none; background:none; padding:0; color:var(--gold); white-space:pre; font-size:.84rem; line-height:1.55; }
-  .codewrap{ position:relative; min-width:0; }
-  .codecopy{ position:absolute; top:8px; right:8px; font-family:'Minecraft',system-ui,sans-serif; letter-spacing:.04em; font-size:.6rem; color:var(--mut); background:#140f02; border:1px solid var(--line-w); border-radius:7px; padding:4px 9px; cursor:pointer; transition:color .15s, border-color .15s; }
-  .codecopy:hover{ color:var(--gold); border-color:var(--gold-d); }
-  .codecopy.ok{ color:#00FF00; border-color:#00FF00; }   /* green success, exactly like .addr.copied on the server button */
+  /* code snippet = a click-to-copy block that mirrors the server-address button: whole outline turns green */
+  .codewrap{ position:relative; min-width:0; cursor:pointer; }
+  .codewrap pre{ transition:border-color .15s; }
+  .codecopy{ position:absolute; bottom:10px; right:11px; font-family:system-ui,-apple-system,sans-serif; letter-spacing:0; font-size:.62rem; color:var(--mut); background:#000; border:1px solid var(--line-w); border-radius:6px; padding:4px 9px; white-space:nowrap; pointer-events:none; transition:color .15s, border-color .15s; }
+  .codewrap:hover .codecopy{ color:var(--gold); border-color:var(--gold-d); }
+  .codewrap.copied pre{ border-color:#00FF00; }
+  .codewrap.copied .codecopy{ color:#00FF00; border-color:#00FF00; }
   .setup-foot{ margin-top:24px; text-align:center; }
   .repos{ margin-top:14px; display:flex; gap:10px 16px; justify-content:center; flex-wrap:wrap; }
   .repos a{ font-size:.88rem; }
@@ -580,23 +583,26 @@ function copyText(text, done){
     document.body.removeChild(ta); done();
   }
 }
-/* give every run-your-own code snippet a copy button */
+/* every run-your-own code snippet copies on click, exactly like the server-address button (the whole block turns green) */
 (function(){
   document.querySelectorAll('.scard pre').forEach(function(pre){
     var wrap=document.createElement('div'); wrap.className='codewrap';
+    wrap.setAttribute('role','button'); wrap.setAttribute('tabindex','0'); wrap.setAttribute('aria-label','Copy code snippet');
     pre.parentNode.insertBefore(wrap, pre); wrap.appendChild(pre);
-    var btn=document.createElement('button'); btn.type='button'; btn.className='codecopy';
-    btn.textContent='copy'; btn.setAttribute('data-i18n','code.copy'); btn.setAttribute('aria-label','Copy code');
-    wrap.appendChild(btn);
-    btn.addEventListener('click', function(){
+    var tag=document.createElement('span'); tag.className='codecopy';
+    tag.setAttribute('data-i18n','server.addr.copy'); tag.textContent='click to copy';   // same i18n keys as the server button
+    wrap.appendChild(tag);
+    function fire(){
       var code=pre.querySelector('code');
       copyText(code?code.textContent:pre.textContent, function(){
         var dict=(typeof I18N!=='undefined' && I18N[document.documentElement.lang]) || (typeof I18N!=='undefined' && I18N.en) || {};
-        var old=btn.textContent;                                        // current localized "copy" label
-        btn.classList.add('ok'); btn.textContent=dict['server.addr.copied']||'copied!';
-        setTimeout(function(){ btn.classList.remove('ok'); btn.textContent=old; }, 1600);   // restore the localized label
+        var old=tag.textContent;
+        wrap.classList.add('copied'); tag.textContent=dict['server.addr.copied']||'copied!';
+        setTimeout(function(){ wrap.classList.remove('copied'); tag.textContent=old; }, 1600);
       });
-    });
+    }
+    wrap.addEventListener('click', fire);
+    wrap.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fire(); } });
   });
 })();
 /* community cards forward to their credits page on click; chip GitHub links are the only exception */
